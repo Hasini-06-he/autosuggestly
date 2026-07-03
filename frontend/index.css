@@ -3,7 +3,7 @@ h1 {
 }
 
  #home-intro{
-    test-align: center;
+    text-align: center;
 
     border: 3px;
     border-style: solid;
