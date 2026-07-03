@@ -1,5 +1,5 @@
 h1 {
-    color: black;
+    color: red;
 }
 
  #home-intro{
@@ -15,4 +15,18 @@ h1 {
 
  #home-intro:hover{
     background-color: burlywood;
+ }
+
+ #nav{
+    text-align: center;
+    background-color: red;
+    height: 25px;
+    padding-top: 5px;
+ }
+
+ #nav a{
+    margin: 0px 5px;
+    /* margin: y-axis, x-axis; */
+    text-decoration: none;
+    color: white;
  }
