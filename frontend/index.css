@@ -9,3 +9,7 @@ h1 {
     border-style: solid;
     border-color: black; 
  }
+
+ #home-intro:hover{
+    background-color: burlywood;
+ }
