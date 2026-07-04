@@ -6,7 +6,7 @@
     <title>Easy Auto Suggest</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif, sans-serif;
             text-align: center;
             padding: 20px;
         }
@@ -45,10 +45,47 @@
 
     <div style="display: inline-flex; align-items: center; border: 2px solid black; padding: 8px 10px; width: 300px; border-radius: 20px;">
         <span style="margin-right: 8px; font-size: 16px;">&#128269;</span>
-        <input type="text" placeholder="Start Typing to search phrases..." style="border: none; outline: none; width: 100%;">
+        <input id="searchBox" type="text" placeholder="Start Typing to search phrases..." style="border: none; outline: none; width: 100%;">
     </div>
 
-    <div style="border:1px solid black; width:300px; margin:8px auto; padding:8px; display:none;">Suggestion Box</div>
+    <div id="suggestionBox" style="border:1px solid black; width:300px; margin:8px auto; padding:8px; display:none;"></div>
+    <div>
 
+        <script>
+            var searchBox = document.getElementById("searchBox");
+            var suggestionBox = document.getElementById("suggestionBox");
+
+            searchBox.addEventListener("input", function() {
+                var userInput = searchBox.value;
+                var suggestionBox = document.getElementById("suggestionBox");
+
+                if (userInput.trim() === ""){
+                    suggestionBox.style.display = "none";
+                } else {
+                    suggestionBox.style.display = "block";
+                }
+
+                var url1 = "https://autosuggest-backend.onrender.com/api/autosuggest?q=";
+                var url3 = "&algorithm=brute&limit=10&weighted=false";
+                var url = url1 + encodeURIComponent(userInput) + url3;
+
+                fetch(url)  
+                    .then(function(response){ 
+                        return response.json(); })
+                    .then(function(data){
+                        console.log(data);
+                        // display data in html
+                        var resultsArray = data.results;
+                        var htmlResults = "";
+                        for (var i = 0; i < resultsArray.length; i++){
+                            htmlResults += "<div id >" + resultsArray[i] + "</div>";
+                        }
+                        suggestionBox.innerHTML = htmlResults;
+                    })
+            });
+        </script>
+    </div>
 </body>
 </html>
+
+<!-- https://autosuggest-backend.onrender.com/api/autosuggest?q=hel&algorithm=brute&limit=10&weighted=false --!>
